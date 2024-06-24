@@ -1,0 +1,16 @@
+##
+##      To build the AI_SDXL_ docker image
+##
+
+# base stuff
+FROM yeepeekoo/public:ai_base_osais
+
+## install requirements
+COPY ./ai/requirements.txt .
+RUN pip install -r requirements.txt
+
+## debug
+RUN pip install debugpy
+
+# run as a server
+CMD ["uvicorn", "main_fastapi:app", "--host", "0.0.0.0", "--port", "5000"]
